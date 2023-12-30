@@ -1,0 +1,22 @@
+# Gradle
+.gradle
+build/
+
+# IntelliJ Idea
+.idea
+*.iws
+*.iml
+*.ipr
+
+# VS Code
+.vscode/
+
+# Directories
+.DS_Store
+.directory
+
+# Minecraft
+.minecraft/
+
+# TODO: Remove local jar dependencies after the project is published
+libs/

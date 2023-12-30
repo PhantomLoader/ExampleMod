@@ -1,0 +1,56 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'fabric-loom' version '0.12-SNAPSHOT'
+}
+
+base {
+    archivesName = 'example-fabric'
+}
+
+repositories {
+    flatDir {
+        dirs '../libs/'
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${minecraftVersion}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${fabricVersion}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabricApiVersion}+${minecraftVersion}"
+    implementation project(':')
+    modImplementation "io.github.phantomloader:library-fabric:${phantomVersion}"
+    annotationProcessor "io.github.phantomloader:processor-fabric:${phantomVersion}"
+}
+
+loom {
+    runs {
+        client {
+            client()
+            ideConfigGenerated(true)
+            runDir("../.minecraft")
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    source project(':').sourceSets.main.allSource
+    options.compilerArgs.add "-AfabricVersion=${fabricVersion}"
+    options.compilerArgs.add "-AphantomVersion=${phantomVersion}"
+    options.compilerArgs.add "-AminecraftVersion=${minecraftVersion}"
+    options.compilerArgs.add "-AmodId=${modId}"
+    options.compilerArgs.add "-AmodGroupId=${modGroupId}"
+    options.compilerArgs.add "-AmodVersion=${modVersion}"
+    options.compilerArgs.add "-AmodName=${modName}"
+    options.compilerArgs.add "-AmodLicense=${modLicense}"
+    options.compilerArgs.add "-AmodVersion=${modVersion}"
+    options.compilerArgs.add "-AmodAuthors=${modAuthors}"
+    options.compilerArgs.add "-AmodDescription=${modDescription}"
+    options.compilerArgs.add "-AmodUrl=${modUrl}"
+    options.compilerArgs.add "-AmodSource=${modSource}"
+}
+
+processResources {
+    from project(':').sourceSets.main.resources
+}
