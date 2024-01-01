@@ -24,7 +24,7 @@ public class ExampleMod {
 	public static final Supplier<ModChestBlock> CHEST_BLOCK_1 = REGISTRY.registerBlockVariantAndItem("chest_1", ModChestBlock::new, () -> Blocks.CHEST);
 	public static final Supplier<ModChestBlock> CHEST_BLOCK_2 = REGISTRY.registerBlockVariantAndItem("chest_2", ModChestBlock::new, CHEST_BLOCK_1);
 
-	public static final Supplier<BlockEntityType<? extends ModChestBlockEntity>> CHEST_BLOCK_ENTITY = REGISTRY.registerBlockEntity("chest", ModChestBlockEntity::new, Set.of(CHEST_BLOCK_1, CHEST_BLOCK_2));
+	public static final Supplier<BlockEntityType<ModChestBlockEntity>> CHEST_BLOCK_ENTITY = REGISTRY.registerBlockEntity("chest", ModChestBlockEntity::new, Set.of(CHEST_BLOCK_1, CHEST_BLOCK_2));
 
 	public static final Supplier<CreativeModeTab> CREATIVE_TAB = REGISTRY.registerCreativeTab("creative_tab", TEST_ITEM, "Example mod", Set.of(TEST_ITEM, TEST_BLOCK));
 

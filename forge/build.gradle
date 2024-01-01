@@ -1,6 +1,7 @@
 plugins {
     id 'idea'
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'org.spongepowered.mixin' version "0.7.+"
 }
 
 base {
@@ -38,6 +39,11 @@ dependencies {
     annotationProcessor "io.github.phantomloader:processor-forge:${phantomVersion}"
 }
 
+mixin {
+    add sourceSets.main, "mixin.example.refmap.json"
+    config "mixin.example.json"
+}
+
 tasks.withType(JavaCompile).configureEach {
     source project(':').sourceSets.main.allSource
     options.compilerArgs.add "-AforgeVersion=${forgeVersion}"
@@ -48,7 +54,6 @@ tasks.withType(JavaCompile).configureEach {
     options.compilerArgs.add "-AmodVersion=${modVersion}"
     options.compilerArgs.add "-AmodName=${modName}"
     options.compilerArgs.add "-AmodLicense=${modLicense}"
-    options.compilerArgs.add "-AmodVersion=${modVersion}"
     options.compilerArgs.add "-AmodAuthors=${modAuthors}"
     options.compilerArgs.add "-AmodDescription=${modDescription}"
     options.compilerArgs.add "-AmodUrl=${modUrl}"

@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "io.github.phantomloader.example.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "refmap": "mixin.example.refmap.json",
+  "mixins": [
+    "SheetsMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
