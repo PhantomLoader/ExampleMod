@@ -1,21 +1,23 @@
-plugins {
-    id 'java'
-    id 'org.spongepowered.gradle.vanilla' version '0.2.1-SNAPSHOT'
-}
-
-allprojects {
+subprojects {
     apply plugin: 'java'
     apply plugin: 'maven-publish'
 
-    group = 'io.github.phantomloader'
-    version = '0.1'
+    // Group id and mod version
+    group = modGroupId
+    version = modVersion
 
-    java {
-        toolchain {
-            JavaLanguageVersion.of(17)
+    // Mojang ships Java 17 to end users in 1.18+
+    java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+    // Repositories for subprojects
+    repositories {
+        // Replace with mavenCentral() to use the published version
+        flatDir {
+            dirs '../libs/'
         }
     }
 
+    // Jar manifest attributes
     jar {
         manifest {
             attributes([
@@ -42,23 +44,4 @@ allprojects {
             }
         }
     }
-}
-
-base {
-    archivesName = 'example'
-}
-
-minecraft {
-    version minecraftVersion
-}
-
-repositories {
-    flatDir {
-        dirs './libs/'
-    }
-}
-
-dependencies {
-    compileOnly 'org.spongepowered:mixin:0.8.5'
-    implementation "io.github.phantomloader:library:${phantomVersion}"
 }

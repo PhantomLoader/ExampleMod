@@ -1,21 +1,27 @@
 plugins {
+    // Idea plugin
     id 'idea'
+    // Forge gradle plugin
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    // Mixin plugin
     id 'org.spongepowered.mixin' version "0.7.+"
 }
 
 base {
+    // Archive name for the forge mod
     archivesName = 'example-forge'
 }
 
 minecraft {
+    // Minecraft version
     mappings channel: 'official', version: minecraftVersion
+    // Forge run configurations
     runs {
         client {
             workingDirectory project.file('../.minecraft')
             ideaModule "${rootProject.name}.${project.name}.main"
             mods {
-                modClientRun {
+                "${modId}" {
                     source sourceSets.main
                 }
             }
@@ -23,29 +29,28 @@ minecraft {
     }
 }
 
-sourceSets.main.resources.srcDir 'src/generated/resources'
-
-repositories {
-    flatDir {
-        dirs '../libs/'
-    }
-}
-
 dependencies {
+    // Minecraft forge dependency
     minecraft "net.minecraftforge:forge:${minecraftVersion}-${forgeVersion}"
-    implementation project(':')
+    // Common module dependency
+    implementation project(':common')
+    // Phantom library dependency
     implementation fg.deobf("io.github.phantomloader:library-forge:${phantomVersion}")
     annotationProcessor fg.deobf("io.github.phantomloader:library-forge:${phantomVersion}")
     annotationProcessor "io.github.phantomloader:processor-forge:${phantomVersion}"
 }
 
 mixin {
+    // Specify mixin refmap
     add sourceSets.main, "mixin.${modId}.refmap.json"
+    // Common module mixin file
     config modMixin
 }
 
 tasks.withType(JavaCompile).configureEach {
-    source project(':').sourceSets.main.allSource
+    // Copy sources from the common module
+    source project(':common').sourceSets.main.allSource
+    // Pass options used by the annotation processor
     options.compilerArgs.add "-AforgeVersion=${forgeVersion}"
     options.compilerArgs.add "-AphantomVersion=${phantomVersion}"
     options.compilerArgs.add "-AminecraftVersion=${minecraftVersion}"
@@ -57,13 +62,15 @@ tasks.withType(JavaCompile).configureEach {
     options.compilerArgs.add "-AmodAuthors=${modAuthors}"
     options.compilerArgs.add "-AmodDescription=${modDescription}"
     options.compilerArgs.add "-AmodUrl=${modUrl}"
-    options.compilerArgs.add "-AmodSource=${modSource}"
+    options.compilerArgs.add "-AmodIssues=${modIssues}"
 }
 
 processResources {
-    from project(':').sourceSets.main.resources
+    // Copy resources from the common module
+    from project(':common').sourceSets.main.resources
 }
 
 jar {
+    // Re-obfuscate the jar
     finalizedBy 'reobfJar'
 }

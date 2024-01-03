@@ -1,0 +1,9 @@
+{
+  "item.example.test_item": "Test Item",
+  "block.example.test_block": "Test Block",
+  "block.example.test_slab": "Test Slab",
+  "block.example.test_stairs": "Test Stairs",
+  "block.example.test_wall": "Test Wall",
+  "block.example.chest_1": "Chest 1",
+  "block.example.chest_2": "Chest 2"
+}

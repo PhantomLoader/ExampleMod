@@ -1,16 +1,21 @@
 plugins {
+    // Idea plugin
     id 'idea'
+    // Fabric plugin
     id 'fabric-loom' version '0.12-SNAPSHOT'
 }
 
 base {
+    // Archive name for the fabric mod
     archivesName = 'example-fabric'
 }
 
 loom {
+    // Specify mixin refmap
     mixin {
         defaultRefmapName.set "mixin.${modId}.refmap.json"
     }
+    // Fabric run configurations
     runs {
         client {
             client()
@@ -20,24 +25,24 @@ loom {
     }
 }
 
-repositories {
-    flatDir {
-        dirs '../libs/'
-    }
-}
-
 dependencies {
+    // Minecraft dependency
     minecraft "com.mojang:minecraft:${minecraftVersion}"
     mappings loom.officialMojangMappings()
+    // Fabric loader and api dependency
     modImplementation "net.fabricmc:fabric-loader:${fabricVersion}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabricApiVersion}+${minecraftVersion}"
-    implementation project(':')
+    // Common module dependency
+    implementation project(':common')
+    // Phantom library dependency
     modImplementation "io.github.phantomloader:library-fabric:${phantomVersion}"
     annotationProcessor "io.github.phantomloader:processor-fabric:${phantomVersion}"
 }
 
 tasks.withType(JavaCompile).configureEach {
-    source project(':').sourceSets.main.allSource
+    // Copy sources from the common module
+    source project(':common').sourceSets.main.allSource
+    // Pass options used by the annotation processor
     options.compilerArgs.add "-AfabricVersion=${fabricVersion}"
     options.compilerArgs.add "-AphantomVersion=${phantomVersion}"
     options.compilerArgs.add "-AminecraftVersion=${minecraftVersion}"
@@ -55,5 +60,6 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 processResources {
-    from project(':').sourceSets.main.resources
+    // Copy resources from the common module
+    from project(':common').sourceSets.main.resources
 }
