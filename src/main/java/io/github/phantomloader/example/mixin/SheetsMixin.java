@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class SheetsMixin {
 
     private static final Material CHEST_1 = new Material(Sheets.CHEST_SHEET, new ResourceLocation("example", "entity/chest/chest_1"));
-    private static final Material CHEST_2 = new Material(Sheets.CHEST_SHEET, new ResourceLocation("example", "entity/chest/chest_1"));
+    private static final Material CHEST_2 = new Material(Sheets.CHEST_SHEET, new ResourceLocation("example", "entity/chest/chest_2"));
 
     @Inject(at = @At("HEAD"), method = "chooseMaterial", cancellable = true)
     private static void chooseMaterial(BlockEntity blockEntity, ChestType type, boolean christmas, CallbackInfoReturnable<Material> callbackInfo) {

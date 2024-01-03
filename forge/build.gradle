@@ -40,8 +40,8 @@ dependencies {
 }
 
 mixin {
-    add sourceSets.main, "mixin.example.refmap.json"
-    config "mixin.example.json"
+    add sourceSets.main, "mixin.${modId}.refmap.json"
+    config modMixin
 }
 
 tasks.withType(JavaCompile).configureEach {

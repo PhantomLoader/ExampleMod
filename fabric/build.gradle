@@ -1,11 +1,23 @@
 plugins {
-    id 'java'
     id 'idea'
     id 'fabric-loom' version '0.12-SNAPSHOT'
 }
 
 base {
     archivesName = 'example-fabric'
+}
+
+loom {
+    mixin {
+        defaultRefmapName.set "mixin.${modId}.refmap.json"
+    }
+    runs {
+        client {
+            client()
+            ideConfigGenerated(true)
+            runDir('../.minecraft')
+        }
+    }
 }
 
 repositories {
@@ -24,16 +36,6 @@ dependencies {
     annotationProcessor "io.github.phantomloader:processor-fabric:${phantomVersion}"
 }
 
-loom {
-    runs {
-        client {
-            client()
-            ideConfigGenerated(true)
-            runDir("../.minecraft")
-        }
-    }
-}
-
 tasks.withType(JavaCompile).configureEach {
     source project(':').sourceSets.main.allSource
     options.compilerArgs.add "-AfabricVersion=${fabricVersion}"
@@ -49,6 +51,7 @@ tasks.withType(JavaCompile).configureEach {
     options.compilerArgs.add "-AmodDescription=${modDescription}"
     options.compilerArgs.add "-AmodUrl=${modUrl}"
     options.compilerArgs.add "-AmodSource=${modSource}"
+    options.compilerArgs.add "-AmodMixin=${modMixin}"
 }
 
 processResources {

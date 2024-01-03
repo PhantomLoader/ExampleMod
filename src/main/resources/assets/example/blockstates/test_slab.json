@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "example:block/test_slab"
+    },
+    "type=double": {
+      "model": "example:block/test_block"
+    },
+    "type=top": {
+      "model": "example:block/test_slab_top"
+    }
+  }
+}
