@@ -24,7 +24,7 @@ public class ModClientEvents implements ClientEventHandler {
 
 	@Override
 	public void registerBlockEntityRenderers(RegisterBlockEntityRenderersEvent event) {
-		event.register(ExampleMod.CHEST_BLOCK_ENTITY, ChestRenderer::new);
+		event.register(ExampleMod.CHEST_BLOCK_ENTITY.get(), ChestRenderer::new);
 		event.registerItemRenderer(ExampleMod.CHEST_BLOCK_1);
 		event.registerItemRenderer(ExampleMod.CHEST_BLOCK_2);
 	}
