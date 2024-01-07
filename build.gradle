@@ -11,10 +11,7 @@ subprojects {
 
     // Repositories for subprojects
     repositories {
-        // Replace with mavenCentral() to use the published version
-        flatDir {
-            dirs '../libs/'
-        }
+        mavenCentral()
     }
 
     // Jar manifest attributes

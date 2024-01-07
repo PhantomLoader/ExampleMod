@@ -12,5 +12,5 @@ dependencies {
     // Mixin dependency
     compileOnly 'org.spongepowered:mixin:0.8.5'
     // Phantom library dependency
-    implementation "io.github.phantomloader:library:${phantomVersion}"
+    implementation "io.github.phantomloader:library-common:${phantomVersion}"
 }

@@ -29,14 +29,20 @@ minecraft {
     }
 }
 
+repositories {
+    maven {
+        url "https://cursemaven.com"
+    }
+}
+
 dependencies {
     // Minecraft forge dependency
     minecraft "net.minecraftforge:forge:${minecraftVersion}-${forgeVersion}"
     // Common module dependency
     implementation project(':common')
     // Phantom library dependency
-    implementation fg.deobf("io.github.phantomloader:library-forge:${phantomVersion}")
-    annotationProcessor fg.deobf("io.github.phantomloader:library-forge:${phantomVersion}")
+    implementation fg.deobf("curse.maven:phantom-loader-958545:5011993")
+    annotationProcessor fg.deobf("curse.maven:phantom-loader-958545:5011993")
     annotationProcessor "io.github.phantomloader:processor-forge:${phantomVersion}"
 }
 
@@ -68,9 +74,4 @@ tasks.withType(JavaCompile).configureEach {
 processResources {
     // Copy resources from the common module
     from project(':common').sourceSets.main.resources
-}
-
-jar {
-    // Re-obfuscate the jar
-    finalizedBy 'reobfJar'
 }

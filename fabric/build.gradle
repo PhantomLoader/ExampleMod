@@ -32,6 +32,12 @@ loom {
     }
 }
 
+repositories {
+    maven {
+        url "https://cursemaven.com"
+    }
+}
+
 dependencies {
     // Minecraft dependency
     minecraft "com.mojang:minecraft:${minecraftVersion}"
@@ -42,8 +48,8 @@ dependencies {
     // Common module dependency
     implementation project(':common')
     // Phantom library dependency
-    modImplementation "io.github.phantomloader:library-fabric:${phantomVersion}"
-    annotationProcessor "io.github.phantomloader:library-fabric:${phantomVersion}"
+    modImplementation "curse.maven:phantom-loader-958545:5011988"
+    annotationProcessor "curse.maven:phantom-loader-958545:5011988"
     annotationProcessor "net.fabricmc:fabric-loader:${fabricVersion}"
     annotationProcessor "io.github.phantomloader:processor-fabric:${phantomVersion}"
 }
