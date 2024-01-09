@@ -29,12 +29,6 @@ minecraft {
     }
 }
 
-repositories {
-    maven {
-        url "https://cursemaven.com"
-    }
-}
-
 dependencies {
     // Minecraft forge dependency
     minecraft "net.minecraftforge:forge:${minecraftVersion}-${forgeVersion}"

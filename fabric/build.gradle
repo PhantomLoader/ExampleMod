@@ -32,12 +32,6 @@ loom {
     }
 }
 
-repositories {
-    maven {
-        url "https://cursemaven.com"
-    }
-}
-
 dependencies {
     // Minecraft dependency
     minecraft "com.mojang:minecraft:${minecraftVersion}"
